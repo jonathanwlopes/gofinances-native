@@ -4,7 +4,7 @@ import AppLoading from "expo-app-loading"
 
 import { useFonts, Poppins_400Regular, Poppins_500Medium, Poppins_700Bold } from "@expo-google-fonts/poppins"
 import theme from "./src/global/styles/theme"
-import { Dashboard } from "./src/screens"
+import { Dashboard, Register } from "./src/screens"
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -19,7 +19,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Dashboard />
+      <Register />
     </ThemeProvider>
   )
 }
