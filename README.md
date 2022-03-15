@@ -97,3 +97,32 @@ export const Container = styled(GestureHandlerRootView)`
 `
 
 ```
+
+## Fechar o teclado clicando em qualquer região da aplicação.
+
+```ts
+import { TouchableWithoutFeedback, Keyboard } from "react-native"
+;<TouchableWithoutFeedback onPress={Keyboard.dismiss}>...</TouchableWithoutFeedback>
+```
+
+## Validação de formulário com Yup.
+
+```ts
+yarn add @hookform/resolvers yup
+
+import * as Yup from "yup"
+import { yupResolver } from "@hookform/resolvers/yup"
+
+const schema = Yup.object().shape({
+  name: Yup.string().required("Nome é obrigatório"),
+  amount: Yup.number().typeError("Informe um valor numérico").positive("O valor não pode ser negativo").required("O valor é obrigatório"),
+})
+
+export const Register = () => {
+  ...
+  const { control, handleSubmit } = useForm({
+    resolver: yupResolver(schema),
+  })
+  ...
+}
+```
