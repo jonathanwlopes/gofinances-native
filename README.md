@@ -60,8 +60,7 @@ export const Photo = styled.Image`
 
 ```ts
 import { Feather } from "@expo/vector-icons"
-
-<Feather name="power" />
+;<Feather name="power" />
 ```
 
 ## Iphone espaçamento superior
@@ -81,4 +80,20 @@ import { Feather } from "@expo/vector-icons"
   justify-content: space-between;
   align-items: center;
 `
+```
+
+## Buttons
+
+- Botões configurados para que funcione tanto no android quanto no IOs
+
+```ts
+expo install react-native-gesture-handler
+
+import { GestureHandlerRootView } from "react-native-gesture-handler"
+
+export const Container = styled(GestureHandlerRootView)`
+  flex: 1;
+  background-color: ${({ theme }) => theme.colors.background};
+`
+
 ```
