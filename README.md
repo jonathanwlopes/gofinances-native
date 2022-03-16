@@ -150,3 +150,25 @@ export const AppRoutes = () => {
 }
 
 ```
+
+## AsyncStorage
+
+```tsx
+expo install @react-native-async-storage/async-storage
+
+    const data = {
+      name: form.name,
+      amount: form.amount,
+      transactionType,
+      category: category.key,
+    }
+
+    try {
+      const dataKey = '@gofinance:transactions'
+      await AsyncStorage.setItem(dataKey, JSON.stringify(data))
+
+    } catch (error) {
+      console.log(error)
+      Alert.alert("Não foi possível salvar")
+    }
+```
