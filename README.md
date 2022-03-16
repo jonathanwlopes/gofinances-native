@@ -126,3 +126,27 @@ export const Register = () => {
   ...
 }
 ```
+
+## React Navigation
+
+```tsx
+yarn add @react-navigation/native
+expo install react-native-screens react-native-safe-area-context
+yarn add @react-navigation/bottom-tabs
+
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+import { Dashboard, Register } from "../screens"
+
+// app.routes.tsx
+export const AppRoutes = () => {
+  const { Navigator, Screen } = createBottomTabNavigator()
+  return (
+    <Navigator>
+      <Screen name="Listagem" component={Dashboard} />
+      <Screen name="Registro" component={Register} />
+      <Screen name="Settings" component={Register} />
+    </Navigator>
+  )
+}
+
+```
