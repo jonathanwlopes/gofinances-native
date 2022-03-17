@@ -2,7 +2,7 @@ import React from "react"
 import * as S from "./styles"
 
 interface HighlightCardProps {
-  type: "up" | "down" | "total"
+  type: "positive" | "negative" | "total"
   title: string
   amount: string
   lastTransaction: string
@@ -10,8 +10,8 @@ interface HighlightCardProps {
 
 export const HighlightCard = ({ title, amount, lastTransaction, type }: HighlightCardProps) => {
   const icon = {
-    up: "arrow-up-circle",
-    down: "arrow-down-circle",
+    positive: "arrow-up-circle",
+    negative: "arrow-down-circle",
     total: "dollar-sign",
   }
 

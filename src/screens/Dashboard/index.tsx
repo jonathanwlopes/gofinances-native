@@ -1,41 +1,52 @@
-import React from "react"
+import React, { useCallback, useEffect, useState } from "react"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 import { TransactionDataProps } from "../../components/TransactionCard/"
 import { HighlightCard, TransactionCard } from "../../components"
 import * as S from "./styles"
+import { useFocusEffect } from "@react-navigation/native"
 
 export interface DataListProps extends TransactionDataProps {
   id: string
 }
 
 export const Dashboard = () => {
-  const data: DataListProps[] = [
-    {
-      id: "1",
-      type: "positive",
-      title: "Desenvolvimento de site",
-      amount: "R$ 12.000,00",
-      category: { name: "Vendas", icon: "dollar-sign" },
-      date: "13/04/2020",
-    },
+  const [data, setData] = useState<DataListProps[]>([])
 
-    {
-      id: "2",
-      type: "negative",
-      title: "Hamburgueria Pizzy",
-      amount: "R$ 59,00",
-      category: { name: "Alimentação", icon: "coffee" },
-      date: "10/04/2020",
-    },
 
-    {
-      id: "3",
-      type: "negative",
-      title: "Aluguel do apartamento",
-      amount: "R$ 1.200,00",
-      category: { name: "Casa", icon: "shopping-bag" },
-      date: "27/03/2020",
-    },
-  ]
+  async function loadTransactions() {
+    const dataKey = "@gofinance:transactions"
+    const response = await AsyncStorage.getItem(dataKey)
+
+    const transactions = response ? JSON.parse(response) : []
+
+    const transactionsFormatted: DataListProps[] = transactions.map((item: DataListProps) => {
+      const amount = Number(item.amount).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
+      const newDate = item.date ? new Date(item.date) : new Date()
+      const date = Intl.DateTimeFormat("pt-BR", { day: "2-digit", month: "2-digit", year: "2-digit" }).format(newDate)
+
+      return {
+        id: item.id,
+        name: item.name,
+        amount,
+        type: item.type,
+        category: item.category,
+        date,
+      }
+    })
+
+    setData(transactionsFormatted)
+  }
+
+  useEffect(() => {
+    loadTransactions()
+    // const dataKey = "@gofinance:transactions"
+    // AsyncStorage.removeItem(dataKey)
+  }, [])
+
+  useFocusEffect(useCallback(() => {
+    loadTransactions()
+  },[]))
+
 
   return (
     <S.Container>
@@ -53,8 +64,8 @@ export const Dashboard = () => {
       </S.Header>
 
       <S.HighlightCards>
-        <HighlightCard title="Entradas" amount="R$ 17.400,00" lastTransaction="Última entrada dia 13 de abril" type="up" />
-        <HighlightCard title="Saídas" amount="R$ 1.259,00" lastTransaction="Última saída dia 03 de abril" type="down" />
+        <HighlightCard title="Entradas" amount="R$ 17.400,00" lastTransaction="Última entrada dia 13 de abril" type="positive" />
+        <HighlightCard title="Saídas" amount="R$ 1.259,00" lastTransaction="Última saída dia 03 de abril" type="negative" />
         <HighlightCard title="Total" amount="R$ 16.141,00" lastTransaction="01 à 16 de abril" type="total" />
       </S.HighlightCards>
 

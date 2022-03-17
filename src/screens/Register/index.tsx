@@ -24,7 +24,7 @@ const schema = Yup.object().shape({
 })
 
 export const Register = () => {
-  const dataKey = "@gofinance:transactions"
+
 
   const [category, setCategory] = useState({
     key: "category",
@@ -45,7 +45,7 @@ export const Register = () => {
     resolver: yupResolver(schema),
   })
 
-  const handleTransactionTypeSelect = (type: "up" | "down") => {
+  const handleTransactionTypeSelect = (type: "positive" | "negative") => {
     setTransactionType(type)
   }
 
@@ -65,12 +65,14 @@ export const Register = () => {
       id: String(uuid.v4()),
       name: form.name,
       amount: form.amount,
-      transactionType,
+      type: transactionType,
       category: category.key,
       date: new Date(),
     }
 
     try {
+      const dataKey = "@gofinance:transactions"
+
       const data = await AsyncStorage.getItem(dataKey)
       const currentData = data ? JSON.parse(data) : []
       const dataFormatted = [...currentData, newTransaction]
@@ -111,13 +113,13 @@ export const Register = () => {
             <InputForm name="amount" placeholder="Preço" control={control} keyboardType="numeric" error={errors.amount && errors.amount.message} />
 
             <S.TransactionsTypes>
-              <TransactionTypeButton title="Income" type="up" onPress={() => handleTransactionTypeSelect("up")} isActive={transactionType === "up"} />
+              <TransactionTypeButton title="Income" type="positive" onPress={() => handleTransactionTypeSelect("positive")} isActive={transactionType === "positive"} />
 
               <TransactionTypeButton
                 title="Outcome"
-                type="down"
-                onPress={() => handleTransactionTypeSelect("down")}
-                isActive={transactionType === "down"}
+                type="negative"
+                onPress={() => handleTransactionTypeSelect("negative")}
+                isActive={transactionType === "negative"}
               />
             </S.TransactionsTypes>
 

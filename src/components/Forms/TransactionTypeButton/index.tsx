@@ -3,13 +3,13 @@ import { TouchableOpacityProps } from "react-native"
 import * as S from "./styles"
 
 const icon = {
-  up: "arrow-up-circle",
-  down: "arrow-down-circle",
+  positive: "arrow-up-circle",
+  negative: "arrow-down-circle",
 }
 
 interface TransactionTypeButtonProps extends TouchableOpacityProps {
   title: string
-  type: "up" | "down"
+  type: "positive" | "negative"
   isActive: boolean
 }
 

@@ -3,7 +3,7 @@ import { RFValue } from "react-native-responsive-fontsize"
 import { Feather } from "@expo/vector-icons"
 
 interface TypeProps {
-  type: "up" | "down" | "total"
+  type: "positive" | "negative" | "total"
 }
 
 export const Container = styled.View<TypeProps>`
@@ -30,13 +30,13 @@ export const Arrow = styled(Feather)<TypeProps>`
   font-size: ${RFValue(40)}px;
 
   ${({ type }) =>
-    type === "up" &&
+    type === "positive" &&
     css`
       color: ${({ theme }) => theme.colors.success};
     `}
 
   ${({ type }) =>
-    type === "down" &&
+    type === "negative" &&
     css`
       color: ${({ theme }) => theme.colors.attention};
     `}
