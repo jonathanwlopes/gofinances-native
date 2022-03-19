@@ -172,3 +172,7 @@ expo install @react-native-async-storage/async-storage
       Alert.alert("Não foi possível salvar")
     }
 ```
+
+## Gráfico 
+
+- Biblioteca VictoryPie

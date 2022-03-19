@@ -2,7 +2,7 @@ import React from "react"
 import { Platform } from "react-native"
 import { useTheme } from "styled-components"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { Dashboard, Register } from "../screens"
+import { Dashboard, Register, Resume } from "../screens"
 import { MaterialIcons } from "@expo/vector-icons"
 export const AppRoutes = () => {
   const { Navigator, Screen } = createBottomTabNavigator()
@@ -32,8 +32,8 @@ export const AppRoutes = () => {
         options={{ tabBarIcon: ({ size, color }) => <MaterialIcons name="attach-money" size={size} color={color} /> }}
       />
       <Screen
-        name="Settings"
-        component={Register}
+        name="Resume"
+        component={Resume}
         options={{ tabBarIcon: ({ size, color }) => <MaterialIcons name="pie-chart" size={size} color={color} /> }}
       />
     </Navigator>
