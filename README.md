@@ -173,6 +173,48 @@ expo install @react-native-async-storage/async-storage
     }
 ```
 
-## Gráfico 
+## Gráfico
 
 - Biblioteca VictoryPie
+
+## Trabalhando com SVGs
+
+- Biblioteca svg transformer
+
+## Autenticação com o google.
+
+- Importante estar logado no expo pelo terminal 'expo login'
+- Criar um projeto no google cloud platform (Credenciais e Tela de Permissões)
+- Não esquecer de publicar o app na tela de permissões
+- URIs de redirecionamento autorizados
+- https://auth.expo.io/@user/your-project-slug
+- Usuário encontrado no expo.io e slug configurado no app.json do projeto.
+
+- Configurar no arquivo app.json o schema
+
+```json
+{
+  "expo": {
+    "name": "gofinances",
+    "slug": "gofinances",
+    "scheme": "gofinances",
+    "version": "1.0.0",
+    "assetBundlePatterns": ["**/*"]
+  }
+}
+```
+
+- Configurar o endpoint
+- https://developers.google.com/identity/protocols/oauth2/javascript-implicit-flow#oauth-2.0-endpoints
+
+- Configurar Session
+- https://docs.expo.dev/versions/latest/sdk/auth-session/
+
+## Informações sensíveis
+
+- Biblioteca babel plugin inline dotenv
+- https://www.npmjs.com/package/babel-plugin-inline-dotenv
+
+```ts
+yarn add babel-plugin-inline-dotenv
+```
