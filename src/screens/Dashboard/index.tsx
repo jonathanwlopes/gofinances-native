@@ -6,6 +6,7 @@ import { HighlightCard, TransactionCard } from "../../components"
 import * as S from "./styles"
 import { useFocusEffect } from "@react-navigation/native"
 import { useTheme } from "styled-components"
+import { useAuth } from "../../hooks/auth"
 export interface DataListProps extends TransactionDataProps {
   id: string
 }
@@ -25,6 +26,7 @@ export const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [transactions, setTransactions] = useState<DataListProps[]>([])
   const [highlightData, setHighlightData] = useState<HighlightDataProps>({} as HighlightDataProps)
+  const { SignOut, user } = useAuth()
 
   let entriesTotal = 0
   let expensiveTotal = 0
@@ -117,13 +119,15 @@ export const Dashboard = () => {
           <S.Header>
             <S.UserWrapper>
               <S.UserInfo>
-                <S.Photo source={{ uri: "https://avatars.githubusercontent.com/u/65980571?v=4" }} />
+                <S.Photo source={{ uri: user.photo }} />
                 <S.User>
                   <S.UserGreeting>Olá,</S.UserGreeting>
-                  <S.UserName>Jonathan</S.UserName>
+                  <S.UserName>{user.name}</S.UserName>
                 </S.User>
               </S.UserInfo>
-              <S.PowerIcon name="power" />
+              <S.LogoutButton onPress={SignOut}>
+                <S.PowerIcon name="power" />
+              </S.LogoutButton>
             </S.UserWrapper>
           </S.Header>
 

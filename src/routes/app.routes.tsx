@@ -4,6 +4,7 @@ import { useTheme } from "styled-components"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { Dashboard, Register, Resume } from "../screens"
 import { MaterialIcons } from "@expo/vector-icons"
+
 export const AppRoutes = () => {
   const { Navigator, Screen } = createBottomTabNavigator()
   const theme = useTheme()
