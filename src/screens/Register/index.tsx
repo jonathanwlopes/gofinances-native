@@ -9,6 +9,7 @@ import { CategorySelect } from "../CategorySelect"
 import * as S from "./styles"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useNavigation } from "@react-navigation/native"
+import { useAuth } from "../../hooks/auth"
 interface FormData {
   name: string
   amount: string
@@ -24,8 +25,6 @@ const schema = Yup.object().shape({
 })
 
 export const Register = () => {
-
-
   const [category, setCategory] = useState({
     key: "category",
     name: "Categoria",
@@ -35,6 +34,8 @@ export const Register = () => {
   const [categoryModalOpen, setCategoryModalOpen] = useState(false)
 
   const navigation = useNavigation<NavigationProps>()
+
+  const { user } = useAuth()
 
   const {
     control,
@@ -71,7 +72,7 @@ export const Register = () => {
     }
 
     try {
-      const dataKey = "@gofinance:transactions"
+      const dataKey = `@gofinance:transactions_user:${user.id}`
 
       const data = await AsyncStorage.getItem(dataKey)
       const currentData = data ? JSON.parse(data) : []
